@@ -13,12 +13,12 @@ class CompleteRequestFactory implements CompleteRequestFactoryInterface
     /**
      * @var array|string[]|string[][]|array<string, string|iterable<mixed, string>>
      */
-    private $headers = [];
+    private $headers;
 
     public function __construct(RequestBuilderFactoryInterface $builderFactory, array $headers = [])
     {
         $this->builderFactory = $builderFactory;
-        $this->headers = \array_merge($this->headers, $headers);
+        $this->headers = $headers;
     }
 
     public function getRequestBuilderFactory(): RequestBuilderFactoryInterface
