@@ -1,4 +1,4 @@
-# slexphp-json
+# slipsr-http-message
 Some psr/http-message wrappers.
 
 # Requirements
