@@ -1,6 +1,6 @@
 <?php
 
-namespace Slipsr\Tests\Http\Message;
+namespace Slipsr\Tests\Http\Message\CompleteFactory;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;

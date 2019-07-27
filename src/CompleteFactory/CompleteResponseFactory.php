@@ -10,9 +10,15 @@ class CompleteResponseFactory implements CompleteResponseFactoryInterface
 {
     private $builderFactory;
 
-    public function __construct(ResponseBuilderFactoryInterface $builderFactory)
+    /**
+     * @var array|string[]|string[][]|array<string, string|iterable<mixed, string>>
+     */
+    private $headers = [];
+
+    public function __construct(ResponseBuilderFactoryInterface $builderFactory, array $headers = [])
     {
         $this->builderFactory = $builderFactory;
+        $this->headers = \array_merge($this->headers, $headers);
     }
 
     public function getResponseBuilderFactory(): ResponseBuilderFactoryInterface
@@ -24,7 +30,7 @@ class CompleteResponseFactory implements CompleteResponseFactoryInterface
     {
         $builder = $this->builderFactory->createResponseBuilder();
         $builder->setStatusCode($statusCode);
-        $builder->addHeaders($headers);
+        $builder->addHeaders(\array_merge($this->headers, $headers));
         if ($body !== null) {
             $builder->setBody($body);
         }

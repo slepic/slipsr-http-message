@@ -10,9 +10,15 @@ class CompleteRequestFactory implements CompleteRequestFactoryInterface
 {
     private $builderFactory;
 
-    public function __construct(RequestBuilderFactoryInterface $builderFactory)
+    /**
+     * @var array|string[]|string[][]|array<string, string|iterable<mixed, string>>
+     */
+    private $headers = [];
+
+    public function __construct(RequestBuilderFactoryInterface $builderFactory, array $headers = [])
     {
         $this->builderFactory = $builderFactory;
+        $this->headers = \array_merge($this->headers, $headers);
     }
 
     public function getRequestBuilderFactory(): RequestBuilderFactoryInterface
@@ -25,7 +31,7 @@ class CompleteRequestFactory implements CompleteRequestFactoryInterface
         $builder = $this->builderFactory->createRequestBuilder();
         $builder->setMethod($method);
         $builder->setUri($uri);
-        $builder->addHeaders($headers);
+        $builder->addHeaders(\array_merge($this->headers, $headers));
         if ($body !== null) {
             $builder->setBody($body);
         }
